@@ -10,4 +10,13 @@
 
 @implementation LLCollectionViewCell
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _photo = [[LLPhoto alloc] initWithFrame:CGRectMake(0, 0, PHOTO_WIDTH, PHOTO_HEIGHT)];
+        [self addSubview:_photo];
+    }
+    return self;
+}
+
 @end

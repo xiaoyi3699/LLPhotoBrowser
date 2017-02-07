@@ -15,6 +15,13 @@
 		C66188F71E48256D00801689 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66188F51E48256D00801689 /* LaunchScreen.storyboard */; };
 		C66189021E48256E00801689 /* LLPhotoBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C66189011E48256E00801689 /* LLPhotoBrowserTests.m */; };
 		C661890D1E48256E00801689 /* LLPhotoBrowserUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C661890C1E48256E00801689 /* LLPhotoBrowserUITests.m */; };
+		C661891F1E48265B00801689 /* LLPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = C661891E1E48265B00801689 /* LLPhotoBrowser.m */; };
+		C66189211E4826ED00801689 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = C66189201E4826ED00801689 /* 1.png */; };
+		C66189231E482B9900801689 /* WX_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = C66189221E482B9900801689 /* WX_pay.png */; };
+		C66189251E483CB300801689 /* 2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C66189241E483CB300801689 /* 2.jpeg */; };
+		C66189281E4844C200801689 /* LLPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = C66189271E4844C200801689 /* LLPhoto.m */; };
+		C661892B1E487EC400801689 /* LLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C661892A1E487EC400801689 /* LLCollectionViewCell.m */; };
+		C669D0611E49A47B00CD5077 /* back_white.png in Resources */ = {isa = PBXBuildFile; fileRef = C669D0601E49A47B00CD5077 /* back_white.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,16 @@
 		C66189081E48256E00801689 /* LLPhotoBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLPhotoBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C661890C1E48256E00801689 /* LLPhotoBrowserUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLPhotoBrowserUITests.m; sourceTree = "<group>"; };
 		C661890E1E48256E00801689 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C661891D1E48265B00801689 /* LLPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPhotoBrowser.h; sourceTree = SOURCE_ROOT; };
+		C661891E1E48265B00801689 /* LLPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPhotoBrowser.m; sourceTree = SOURCE_ROOT; };
+		C66189201E4826ED00801689 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		C66189221E482B9900801689 /* WX_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WX_pay.png; sourceTree = "<group>"; };
+		C66189241E483CB300801689 /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
+		C66189261E4844C200801689 /* LLPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPhoto.h; sourceTree = "<group>"; };
+		C66189271E4844C200801689 /* LLPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPhoto.m; sourceTree = "<group>"; };
+		C66189291E487EC400801689 /* LLCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLCollectionViewCell.h; path = ../LLCollectionViewCell.h; sourceTree = "<group>"; };
+		C661892A1E487EC400801689 /* LLCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLCollectionViewCell.m; path = ../LLCollectionViewCell.m; sourceTree = "<group>"; };
+		C669D0601E49A47B00CD5077 /* back_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_white.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +118,8 @@
 		C66188E61E48256C00801689 /* LLPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				C669D05F1E49A0A100CD5077 /* LLPhotoBrowser */,
+				C669D05E1E49A09200CD5077 /* images */,
 				C66188EA1E48256C00801689 /* AppDelegate.h */,
 				C66188EB1E48256D00801689 /* AppDelegate.m */,
 				C66188ED1E48256D00801689 /* ViewController.h */,
@@ -138,6 +157,30 @@
 				C661890E1E48256E00801689 /* Info.plist */,
 			);
 			path = LLPhotoBrowserUITests;
+			sourceTree = "<group>";
+		};
+		C669D05E1E49A09200CD5077 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C669D0601E49A47B00CD5077 /* back_white.png */,
+				C66189241E483CB300801689 /* 2.jpeg */,
+				C66189221E482B9900801689 /* WX_pay.png */,
+				C66189201E4826ED00801689 /* 1.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		C669D05F1E49A0A100CD5077 /* LLPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				C66189261E4844C200801689 /* LLPhoto.h */,
+				C66189271E4844C200801689 /* LLPhoto.m */,
+				C661891D1E48265B00801689 /* LLPhotoBrowser.h */,
+				C661891E1E48265B00801689 /* LLPhotoBrowser.m */,
+				C66189291E487EC400801689 /* LLCollectionViewCell.h */,
+				C661892A1E487EC400801689 /* LLCollectionViewCell.m */,
+			);
+			name = LLPhotoBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,7 +250,7 @@
 				TargetAttributes = {
 					C66188E31E48256C00801689 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 78835ZHBFS;
+						DevelopmentTeam = D83H98L7Y7;
 						ProvisioningStyle = Automatic;
 					};
 					C66188FC1E48256D00801689 = {
@@ -249,8 +292,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C66189231E482B9900801689 /* WX_pay.png in Resources */,
 				C66188F71E48256D00801689 /* LaunchScreen.storyboard in Resources */,
+				C66189251E483CB300801689 /* 2.jpeg in Resources */,
+				C66189211E4826ED00801689 /* 1.png in Resources */,
 				C66188F41E48256D00801689 /* Assets.xcassets in Resources */,
+				C669D0611E49A47B00CD5077 /* back_white.png in Resources */,
 				C66188F21E48256D00801689 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,9 +323,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C661892B1E487EC400801689 /* LLCollectionViewCell.m in Sources */,
+				C66189281E4844C200801689 /* LLPhoto.m in Sources */,
 				C66188EF1E48256D00801689 /* ViewController.m in Sources */,
 				C66188EC1E48256D00801689 /* AppDelegate.m in Sources */,
 				C66188E91E48256C00801689 /* main.m in Sources */,
+				C661891F1E48265B00801689 /* LLPhotoBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 78835ZHBFS;
+				DEVELOPMENT_TEAM = D83H98L7Y7;
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maochao.LLPhotoBrowser;
@@ -439,7 +489,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 78835ZHBFS;
+				DEVELOPMENT_TEAM = D83H98L7Y7;
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maochao.LLPhotoBrowser;
@@ -516,6 +566,7 @@
 				C66189131E48256E00801689 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C66189141E48256E00801689 /* Build configuration list for PBXNativeTarget "LLPhotoBrowserTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +575,7 @@
 				C66189161E48256E00801689 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C66189171E48256E00801689 /* Build configuration list for PBXNativeTarget "LLPhotoBrowserUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +584,7 @@
 				C66189191E48256E00801689 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
