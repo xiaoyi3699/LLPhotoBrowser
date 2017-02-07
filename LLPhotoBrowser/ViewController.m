@@ -25,6 +25,7 @@
                 [UIImage imageNamed:@"2.jpeg"],
                 [UIImage imageNamed:@"WX_pay"]];
 }
+
 - (IBAction)btnClick:(UIButton *)sender {
     LLPhotoBrowser *photoBrowser = [[LLPhotoBrowser alloc] initWithImages:_images currentIndex:1];
     photoBrowser.delegate = self;
