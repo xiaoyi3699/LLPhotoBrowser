@@ -169,11 +169,6 @@
     [_collectionView reloadData];
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-}
-
 - (void)dealloc {
     NSLog(@"图片浏览器释放，无内存泄漏");
 }
