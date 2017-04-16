@@ -13,7 +13,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _photo = [[LLPhoto alloc] initWithFrame:CGRectMake(0, 0, PHOTO_WIDTH, PHOTO_HEIGHT)];
+        _photo = [[LLPhoto alloc] initWithFrame:self.bounds];
+        _photo.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self addSubview:_photo];
     }
     return self;

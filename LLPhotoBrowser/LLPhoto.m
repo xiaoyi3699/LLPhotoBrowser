@@ -21,10 +21,9 @@
         self.delegate = self;
         self.minimumZoomScale = MinScale;
         self.maximumZoomScale = MaxSCale;
+        self.backgroundColor  = [UIColor blackColor];
         
         _imageView = [[UIImageView alloc] init];
-        _imageView.clipsToBounds = YES;
-        //_imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_imageView];
         
         UITapGestureRecognizer *singleClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleClick:)];
@@ -41,68 +40,45 @@
 
 #pragma mark - 按图片比例适配imageView的frame
 - (void)setCurrentImage:(UIImage *)currentImage {
+    _currentImage = currentImage;
+    [self layoutImageView];
+}
+
+- (void)layoutImageView {
     CGRect imageFrame;
-    if (currentImage.size.width > PHOTO_WIDTH || currentImage.size.height > PHOTO_HEIGHT) {
-        CGFloat imageRatio = currentImage.size.width/currentImage.size.height;
-        CGFloat photoRatio = PHOTO_WIDTH/PHOTO_HEIGHT;
+    if (_currentImage.size.width > self.bounds.size.width || _currentImage.size.height > self.bounds.size.height) {
+        CGFloat imageRatio = _currentImage.size.width/_currentImage.size.height;
+        CGFloat photoRatio = self.bounds.size.width/self.bounds.size.height;
         
         if (imageRatio > photoRatio) {
-            imageFrame.size = CGSizeMake(PHOTO_WIDTH, PHOTO_WIDTH/currentImage.size.width*currentImage.size.height);
+            imageFrame.size = CGSizeMake(self.bounds.size.width, self.bounds.size.width/_currentImage.size.width*_currentImage.size.height);
             imageFrame.origin.x = 0;
-            imageFrame.origin.y = (PHOTO_HEIGHT-imageFrame.size.height)/2.0;
+            imageFrame.origin.y = (self.bounds.size.height-imageFrame.size.height)/2.0;
         }
         else {
-            imageFrame.size = CGSizeMake(PHOTO_HEIGHT/currentImage.size.height*currentImage.size.width, PHOTO_HEIGHT);
-            imageFrame.origin.x = (PHOTO_WIDTH-imageFrame.size.width)/2.0;
+            imageFrame.size = CGSizeMake(self.bounds.size.height/_currentImage.size.height*_currentImage.size.width, self.bounds.size.height);
+            imageFrame.origin.x = (self.bounds.size.width-imageFrame.size.width)/2.0;
             imageFrame.origin.y = 0;
         }
     }
     else {
-        imageFrame.size = currentImage.size;
-        imageFrame.origin.x = (PHOTO_WIDTH-currentImage.size.width)/2.0;
-        imageFrame.origin.y = (PHOTO_HEIGHT-currentImage.size.height)/2.0;
+        imageFrame.size = _currentImage.size;
+        imageFrame.origin.x = (self.bounds.size.width-_currentImage.size.width)/2.0;
+        imageFrame.origin.y = (self.bounds.size.height-_currentImage.size.height)/2.0;
     }
     _imageView.frame = imageFrame;
-    _imageView.image = currentImage;
-    _currentImage = currentImage;
+    _imageView.image = _currentImage;
 }
 
 #pragma mark - UIScrollViewDelegate
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    
     return _imageView;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView{
-    
-    CGFloat photoX = (PHOTO_WIDTH-_imageView.frame.size.width)/2.0;
-    CGFloat photoY = (PHOTO_HEIGHT-_imageView.frame.size.height)/2.0;
-    CGRect photoF = _imageView.frame;
-    
-    if (photoX>0) {
-        photoF.origin.x = photoX;
-    }
-    else {
-        photoF.origin.x = 0;
-    }
-    
-    if (photoY>0) {
-        photoF.origin.y = photoY;
-    }
-    else {
-        photoF.origin.y = 0;
-    }
-    
-    _imageView.frame = photoF;
-}
-
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    if (scale>1) {
-        self.isEnlarged = YES;
-    }
-    else {
-        self.isEnlarged = NO;
-    }
+    CGFloat offsetX = (self.bounds.size.width>self.contentSize.width)?(self.bounds.size.width-self.contentSize.width)*0.5:0.0;
+    CGFloat offsetY = (self.bounds.size.height>self.contentSize.height)?(self.bounds.size.height-self.contentSize.height)*0.5:0.0;
+    _imageView.center = CGPointMake(scrollView.contentSize.width*0.5+offsetX, scrollView.contentSize.height*0.5+offsetY);
 }
 
 #pragma mark - 手势交互
@@ -110,19 +86,22 @@
     if ([self.ll_delegate respondsToSelector:@selector(singleClickWithPhoto:)]) {
         [self.ll_delegate singleClickWithPhoto:self];
     }
+    else {
+        [self removeFromSuperview];
+    }
 }
 
 - (void)doubleClick:(UITapGestureRecognizer *)gestureRecognizer {
-    [UIView animateWithDuration:.2 animations:^{
-        if (self.isEnlarged) {
-            self.zoomScale = MinScale;
-        }
-        else {
-            self.zoomScale = MaxSCale;
-        }
-    } completion:^(BOOL finished) {
-        self.isEnlarged = !self.isEnlarged;
-    }];
+    
+    if (self.zoomScale > MinScale) {
+        [self setZoomScale:MinScale animated:YES];
+    } else {
+        CGPoint touchPoint = [gestureRecognizer locationInView:_imageView];
+        CGFloat newZoomScale = self.maximumZoomScale;
+        CGFloat xsize = self.frame.size.width/newZoomScale;
+        CGFloat ysize = self.frame.size.height/newZoomScale;
+        [self zoomToRect:CGRectMake(touchPoint.x-xsize/2, touchPoint.y-ysize/2, xsize, ysize) animated:YES];
+    }
 }
 
 @end

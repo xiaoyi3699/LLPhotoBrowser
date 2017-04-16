@@ -250,7 +250,7 @@
 				TargetAttributes = {
 					C66188E31E48256C00801689 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = D83H98L7Y7;
+						DevelopmentTeam = 78835ZHBFS;
 						ProvisioningStyle = Automatic;
 					};
 					C66188FC1E48256D00801689 = {
@@ -477,11 +477,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D83H98L7Y7;
+				DEVELOPMENT_TEAM = 78835ZHBFS;
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.maochao.LLPhotoBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wang.foundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -489,11 +490,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D83H98L7Y7;
+				DEVELOPMENT_TEAM = 78835ZHBFS;
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.maochao.LLPhotoBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wang.foundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

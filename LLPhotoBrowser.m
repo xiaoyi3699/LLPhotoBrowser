@@ -9,7 +9,7 @@
 #import "LLPhotoBrowser.h"
 #import "LLCollectionViewCell.h"
 
-@interface LLPhotoBrowser ()<UICollectionViewDelegate,UICollectionViewDataSource,LLPhotoDelegate>{
+@interface LLPhotoBrowser ()<UICollectionViewDelegate,UICollectionViewDataSource,LLPhotoDelegate,UICollectionViewDelegateFlowLayout>{
     NSArray<UIImage *> *_images;
     NSInteger _currentIndex;
     UICollectionView *_collectionView;
@@ -44,9 +44,8 @@
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(PHOTO_WIDTH, PHOTO_HEIGHT);
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, PHOTO_WIDTH, PHOTO_HEIGHT) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.pagingEnabled = YES;
@@ -59,8 +58,9 @@
     }
     
     /******自定义界面******/
-    _navigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PHOTO_WIDTH, 64)];
+    _navigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64)];
     _navigationBar.backgroundColor = [UIColor colorWithWhite:.5 alpha:.5];
+    _navigationBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_navigationBar];
     
     UIImageView *backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 21, 16, 22)];
@@ -74,26 +74,32 @@
     [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_navigationBar addSubview:backBtn];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 17, PHOTO_WIDTH-160, 30)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 17, self.view.bounds.size.width-160, 30)];
     _titleLabel.text = [NSString stringWithFormat:@"%ld/%ld",_currentIndex+1,_images.count];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:18];
     [_navigationBar addSubview:_titleLabel];
     
-    _tabBar = [[UIView alloc] initWithFrame:CGRectMake(0, PHOTO_HEIGHT-44, PHOTO_WIDTH, 44)];
+    _tabBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-44, self.view.bounds.size.width, 44)];
     _tabBar.backgroundColor = [UIColor colorWithWhite:.5 alpha:.5];
+    _tabBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:_tabBar];
     
     UIButton *sendImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    sendImageBtn.frame = CGRectMake(PHOTO_WIDTH-50, 7, 40, 30);
+    sendImageBtn.frame = CGRectMake(self.view.bounds.size.width-50, 7, 40, 30);
     [sendImageBtn setTitle:@"发送" forState:UIControlStateNormal];
     [sendImageBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [sendImageBtn addTarget:self action:@selector(sendImage:) forControlEvents:UIControlEventTouchUpInside];
+    sendImageBtn.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [_tabBar addSubview:sendImageBtn];
 }
 
 #pragma mark - UICollectionViewDataSource
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.view.bounds.size;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _images.count;
@@ -107,6 +113,7 @@
     }
     cell.photo.currentImage = _images[indexPath.item];
     cell.photo.currentIndex = indexPath.item;
+    cell.photo.zoomScale = 1.0;
     
     return cell;
 }
@@ -115,11 +122,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     LLCollectionViewCell *LLCell = (LLCollectionViewCell *)cell;
     LLCell.photo.zoomScale = 1.0;
-    LLCell.photo.isEnlarged = NO;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    _currentIndex = (long)scrollView.contentOffset.x/PHOTO_WIDTH;
+    _currentIndex = (long)scrollView.contentOffset.x/self.view.bounds.size.width;
     _titleLabel.text = [NSString stringWithFormat:@"%ld/%ld",_currentIndex+1,_images.count];
 }
 
@@ -149,12 +155,27 @@
     if ([self.delegate respondsToSelector:@selector(photoBrowser:didSelectImage:)]) {
         [self.delegate photoBrowser:self didSelectImage:_images[_currentIndex]];
     }
-    [self goBack];
 }
 
 #pragma mark - 隐藏状态栏
 - (BOOL)prefersStatusBarHidden{
     return YES;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    _collectionView.frame = self.view.bounds;
+    _collectionView.contentOffset = CGPointMake(self.view.bounds.size.width*_currentIndex, 0);
+    [_collectionView reloadData];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+}
+
+- (void)dealloc {
+    NSLog(@"图片浏览器释放，无内存泄漏");
 }
 
 @end
