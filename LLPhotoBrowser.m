@@ -10,7 +10,7 @@
 #import "LLCollectionViewCell.h"
 
 @interface LLPhotoBrowser ()<UICollectionViewDelegate,UICollectionViewDataSource,LLPhotoDelegate,UICollectionViewDelegateFlowLayout>{
-    NSArray<UIImage *> *_images;
+    NSArray *_images;
     NSInteger _currentIndex;
     UICollectionView *_collectionView;
     UIView *_navigationBar;
