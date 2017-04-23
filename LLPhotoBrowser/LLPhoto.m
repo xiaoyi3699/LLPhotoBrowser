@@ -7,9 +7,13 @@
 //
 
 #import "LLPhoto.h"
+#import <ImageIO/ImageIO.h>
 
 @interface LLPhoto ()<UIScrollViewDelegate>{
     UIImageView *_imageView;
+    UIImage     *_currentImage;
+    NSMutableArray *_images;
+    CGFloat     _totalTime;
 }
 @end
 
@@ -22,6 +26,8 @@
         self.minimumZoomScale = MinScale;
         self.maximumZoomScale = MaxSCale;
         self.backgroundColor  = [UIColor blackColor];
+        
+        _images   = [[NSMutableArray alloc] initWithCapacity:1];
         
         _imageView = [[UIImageView alloc] init];
         [self addSubview:_imageView];
@@ -38,12 +44,91 @@
     return self;
 }
 
-#pragma mark - 按图片比例适配imageView的frame
-- (void)setCurrentImage:(UIImage *)currentImage {
-    _currentImage = currentImage;
-    [self layoutImageView];
+#pragma mark - 设置当前显示的图片
+- (void)setLl_image:(id)ll_image {
+    
+    if (_images.count > 1) {
+        _totalTime = 0;
+        [_images removeAllObjects];
+        [_imageView stopAnimating];
+    }
+    
+    _ll_image = ll_image;
+    _imageView.image = nil;
+    
+    if ([ll_image isKindOfClass:[UIImage class]]) {
+        _currentImage = (UIImage *)ll_image;
+        [self layoutImageView];
+    }
+    else if ([ll_image isKindOfClass:[NSString class]]) {
+        [self setPath:(NSString *)ll_image];
+    }
 }
 
+//根据路径/网址加载图片
+- (void)setPath:(NSString *)path {
+    
+    NSURL *URL = [NSURL URLWithString:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSData *data;
+        if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+            data = [NSData dataWithContentsOfURL:URL];
+        }
+        else if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            data = [NSData dataWithContentsOfFile:path];
+        }
+        
+        if (data) {
+            NSDictionary *dic        = @{(NSString *)kCGImagePropertyGIFLoopCount:@0};
+            NSDictionary *properties = @{(__bridge_transfer NSString *)kCGImagePropertyGIFDictionary:dic};
+            CGImageSourceRef imageSourceRef = CGImageSourceCreateWithData((CFDataRef)data, (CFDictionaryRef)properties);
+            
+            if (imageSourceRef) {
+                size_t imageCount = CGImageSourceGetCount(imageSourceRef);
+                
+                if (imageCount == 1) {//单张图片
+                    CGImageRef cgimage = CGImageSourceCreateImageAtIndex(imageSourceRef, 0, NULL);
+                    _currentImage = [UIImage imageWithCGImage:cgimage];
+                    
+                    CFRelease(cgimage);
+                    CFRelease(imageSourceRef);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self layoutImageView];
+                    });
+                }
+                else if (imageCount > 1) {//gif图片
+                    
+                    NSMutableArray *times    = [[NSMutableArray alloc] initWithCapacity:imageCount];
+                    
+                    for (size_t i = 0; i < imageCount; i++) {
+                        
+                        CGImageRef cgimage = CGImageSourceCreateImageAtIndex(imageSourceRef, i, NULL);
+                        UIImage *image = [UIImage imageWithCGImage:cgimage];
+                        CFRelease(cgimage);
+                        if (i == 0) {
+                            _currentImage = image;
+                        }
+                        [_images addObject:image];
+                        
+                        NSDictionary *properties    = (__bridge_transfer NSDictionary *)CGImageSourceCopyPropertiesAtIndex(imageSourceRef, i, NULL);
+                        NSDictionary *gifProperties = [properties valueForKey:(__bridge NSString *)kCGImagePropertyGIFDictionary];
+                        NSString *gifDelayTime      = [gifProperties valueForKey:(__bridge NSString*)kCGImagePropertyGIFDelayTime];
+                        [times addObject:gifDelayTime];
+                        _totalTime += [gifDelayTime floatValue];
+                    }
+                    CFRelease(imageSourceRef);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self layoutImageView];
+                    });
+                }
+            }
+        }
+    });
+}
+
+//自适应图片的宽高比
 - (void)layoutImageView {
     CGRect imageFrame;
     if (_currentImage.size.width > self.bounds.size.width || _currentImage.size.height > self.bounds.size.height) {
@@ -68,6 +153,12 @@
     }
     _imageView.frame = imageFrame;
     _imageView.image = _currentImage;
+    if (_images.count > 1) {
+        [_imageView setAnimationImages:_images];
+        [_imageView setAnimationDuration:_totalTime];
+        [_imageView setAnimationRepeatCount:LONG_MAX];
+        [_imageView startAnimating];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -82,6 +173,7 @@
 }
 
 #pragma mark - 手势交互
+//单击
 - (void)singleClick:(UITapGestureRecognizer *)gestureRecognizer {
     if ([self.ll_delegate respondsToSelector:@selector(singleClickWithPhoto:)]) {
         [self.ll_delegate singleClickWithPhoto:self];
@@ -91,6 +183,7 @@
     }
 }
 
+//双击
 - (void)doubleClick:(UITapGestureRecognizer *)gestureRecognizer {
     
     if (self.zoomScale > MinScale) {
@@ -102,6 +195,10 @@
         CGFloat ysize = self.frame.size.height/newZoomScale;
         [self zoomToRect:CGRectMake(touchPoint.x-xsize/2, touchPoint.y-ysize/2, xsize, ysize) animated:YES];
     }
+}
+
+- (void)dealloc {
+    NSLog(@"释放");
 }
 
 @end

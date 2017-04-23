@@ -20,6 +20,6 @@
 @protocol LLPhotoBrowserDelegate <NSObject>
 
 @optional
-- (void)photoBrowser:(LLPhotoBrowser *)photoBrowser didSelectImage:(UIImage *)image;
+- (void)photoBrowser:(LLPhotoBrowser *)photoBrowser didSelectImage:(id)image;
 
 @end

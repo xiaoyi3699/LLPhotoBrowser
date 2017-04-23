@@ -111,8 +111,7 @@
     if (!cell.photo.ll_delegate) {
         cell.photo.ll_delegate = self;
     }
-    cell.photo.currentImage = _images[indexPath.item];
-    cell.photo.currentIndex = indexPath.item;
+    cell.photo.ll_image = _images[indexPath.item];
     cell.photo.zoomScale = 1.0;
     
     return cell;

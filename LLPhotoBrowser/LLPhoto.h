@@ -13,8 +13,9 @@
 
 @interface LLPhoto : UIScrollView
 
-@property (nonatomic, strong) UIImage *currentImage;
-@property (nonatomic, assign) NSInteger currentIndex;
+///当前显示的图片
+@property (nonatomic, strong) id ll_image;
+
 @property (nonatomic, weak)   id<LLPhotoDelegate> ll_delegate;
 @end
 
