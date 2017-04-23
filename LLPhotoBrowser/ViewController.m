@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "LLPhotoBrowser.h"
 @interface ViewController ()<LLPhotoBrowserDelegate>{
-    NSArray *_images;
+    NSArray *_images; //支持UIImage对象、网络图片地址、本地文件路径
 }
 
 @end
@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _images = @[[UIImage imageNamed:@"1"],
-                [UIImage imageNamed:@"2.jpeg"],
+                [[NSBundle mainBundle] pathForResource:@"2" ofType:@"jpeg"],
                 [UIImage imageNamed:@"WX_pay"],
                 [UIImage imageNamed:@"1"],
                 [UIImage imageNamed:@"2.jpeg"],
