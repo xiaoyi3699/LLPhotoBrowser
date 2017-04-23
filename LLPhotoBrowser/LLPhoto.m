@@ -49,8 +49,8 @@
     
     if (_images.count > 1) {
         _totalTime = 0;
-        [_images removeAllObjects];
         [_imageView stopAnimating];
+        [_images removeAllObjects];
     }
     
     _ll_image = ll_image;
