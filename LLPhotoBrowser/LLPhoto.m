@@ -68,7 +68,10 @@
 //根据路径/网址加载图片
 - (void)setPath:(NSString *)path {
     
-    NSURL *URL = [NSURL URLWithString:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *URL = [NSURL URLWithString:path];
+    if (URL == nil) {
+        URL = [NSURL URLWithString:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
