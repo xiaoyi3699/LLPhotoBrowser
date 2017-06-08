@@ -26,7 +26,7 @@
                 [UIImage imageNamed:@"WX_pay"],
                 @"http://oopas6scq.bkt.clouddn.com/image/huanyingguanglin.gif",
                 @"http://oopas6scq.bkt.clouddn.com/image/meinv_0.jpg",
-                @"http://oopas6scq.bkt.clouddn.com/image/wzry_libai.jpeg",];
+                @"http://oopas6scq.bkt.clouddn.com/image/wzry_libai.jpeg"];
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
