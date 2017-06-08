@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75F14C0D1EE8F5200080E4EB /* LLImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F14C0C1EE8F5200080E4EB /* LLImageCache.m */; };
+		75F151341EE8F84D0080E4EB /* LLFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F151331EE8F84D0080E4EB /* LLFileManager.m */; };
 		C66188E91E48256C00801689 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C66188E81E48256C00801689 /* main.m */; };
 		C66188EC1E48256D00801689 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C66188EB1E48256D00801689 /* AppDelegate.m */; };
 		C66188EF1E48256D00801689 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66188EE1E48256D00801689 /* ViewController.m */; };
@@ -42,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75F14C0B1EE8F5200080E4EB /* LLImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLImageCache.h; sourceTree = "<group>"; };
+		75F14C0C1EE8F5200080E4EB /* LLImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLImageCache.m; sourceTree = "<group>"; };
+		75F151321EE8F84D0080E4EB /* LLFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLFileManager.h; sourceTree = "<group>"; };
+		75F151331EE8F84D0080E4EB /* LLFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLFileManager.m; sourceTree = "<group>"; };
 		C66188E41E48256C00801689 /* LLPhotoBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLPhotoBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C66188E81E48256C00801689 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C66188EA1E48256C00801689 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -95,6 +101,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75F14C0A1EE8F5200080E4EB /* LLImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				75F151321EE8F84D0080E4EB /* LLFileManager.h */,
+				75F151331EE8F84D0080E4EB /* LLFileManager.m */,
+				75F14C0B1EE8F5200080E4EB /* LLImageCache.h */,
+				75F14C0C1EE8F5200080E4EB /* LLImageCache.m */,
+			);
+			path = LLImageCache;
+			sourceTree = "<group>";
+		};
 		C66188DB1E48256C00801689 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +135,7 @@
 		C66188E61E48256C00801689 /* LLPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				75F14C0A1EE8F5200080E4EB /* LLImageCache */,
 				C669D05F1E49A0A100CD5077 /* LLPhotoBrowser */,
 				C669D05E1E49A09200CD5077 /* images */,
 				C66188EA1E48256C00801689 /* AppDelegate.h */,
@@ -274,6 +292,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = C66188DB1E48256C00801689;
 			productRefGroup = C66188E51E48256C00801689 /* Products */;
@@ -328,7 +347,9 @@
 				C66188EF1E48256D00801689 /* ViewController.m in Sources */,
 				C66188EC1E48256D00801689 /* AppDelegate.m in Sources */,
 				C66188E91E48256C00801689 /* main.m in Sources */,
+				75F151341EE8F84D0080E4EB /* LLFileManager.m in Sources */,
 				C661891F1E48265B00801689 /* LLPhotoBrowser.m in Sources */,
+				75F14C0D1EE8F5200080E4EB /* LLImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,9 +499,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N6X5V58LVJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager",
+				);
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager/lame",
+					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager/ZBarSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wang.foundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -492,9 +522,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N6X5V58LVJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager",
+				);
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager/lame",
+					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager/ZBarSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wang.foundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

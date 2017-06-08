@@ -7,6 +7,7 @@
 //
 
 #import "LLPhoto.h"
+#import "LLImageCache.h"
 #import <ImageIO/ImageIO.h>
 
 @interface LLPhoto ()<UIScrollViewDelegate>{
@@ -77,7 +78,7 @@
         
         NSData *data;
         if ([[UIApplication sharedApplication] canOpenURL:URL]) {
-            data = [NSData dataWithContentsOfURL:URL];
+            data = [[LLImageCache imageCache] getDataWithUrl:URL];
         }
         else if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
             data = [NSData dataWithContentsOfFile:path];
