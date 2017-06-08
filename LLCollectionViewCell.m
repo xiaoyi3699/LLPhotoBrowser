@@ -24,4 +24,9 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    _photo.zoomScale = 1.0;
+    _photo.contentSize = _photo.bounds.size;
+}
+
 @end

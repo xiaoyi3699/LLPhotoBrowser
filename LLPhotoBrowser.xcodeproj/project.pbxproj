@@ -250,7 +250,7 @@
 				TargetAttributes = {
 					C66188E31E48256C00801689 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 78835ZHBFS;
+						DevelopmentTeam = N6X5V58LVJ;
 						ProvisioningStyle = Automatic;
 					};
 					C66188FC1E48256D00801689 = {
@@ -477,7 +477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 78835ZHBFS;
+				DEVELOPMENT_TEAM = N6X5V58LVJ;
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -491,7 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 78835ZHBFS;
+				DEVELOPMENT_TEAM = N6X5V58LVJ;
 				INFOPLIST_FILE = LLPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
