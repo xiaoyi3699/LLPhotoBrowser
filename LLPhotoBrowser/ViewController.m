@@ -19,14 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _images = @[[UIImage imageNamed:@"1"],
+                @"http://www.vasueyun.cn/gif/flag.gif",
                 [[NSBundle mainBundle] pathForResource:@"2" ofType:@"jpeg"],
                 [UIImage imageNamed:@"WX_pay"],
-                [UIImage imageNamed:@"1"],
-                [UIImage imageNamed:@"2.jpeg"],
-                [UIImage imageNamed:@"WX_pay"],
-                @"http://oopas6scq.bkt.clouddn.com/image/huanyingguanglin.gif",
-                @"http://oopas6scq.bkt.clouddn.com/image/meinv_0.jpg",
-                @"http://oopas6scq.bkt.clouddn.com/image/wzry_libai.jpeg"];
+                @"http://www.vasueyun.cn/image/bg.png",
+                @"http://www.vasueyun.cn/gif/fire.gif",
+                @"http://www.vasueyun.cn/gif/snow.gif",
+                @"http://www.vasueyun.cn/gif/thanks.gif"];
 }
 
 - (IBAction)btnClick:(UIButton *)sender {

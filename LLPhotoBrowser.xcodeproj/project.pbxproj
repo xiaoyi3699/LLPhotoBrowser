@@ -268,7 +268,7 @@
 				TargetAttributes = {
 					C66188E31E48256C00801689 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = N6X5V58LVJ;
+						DevelopmentTeam = 78Y7DBKKYD;
 						ProvisioningStyle = Automatic;
 					};
 					C66188FC1E48256D00801689 = {
@@ -290,6 +290,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -498,7 +499,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = N6X5V58LVJ;
+				DEVELOPMENT_TEAM = 78Y7DBKKYD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager",
@@ -521,7 +522,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = N6X5V58LVJ;
+				DEVELOPMENT_TEAM = 78Y7DBKKYD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLPhotoBrowser/LLFileManager",

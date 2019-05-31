@@ -68,16 +68,17 @@
 
 //根据路径/网址加载图片
 - (void)setPath:(NSString *)path {
-    
+    if (path.length == 0) return;
     NSURL *URL = [NSURL URLWithString:path];
     if (URL == nil) {
         URL = [NSURL URLWithString:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     
+    BOOL isNetImage = [[UIApplication sharedApplication] canOpenURL:URL];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         NSData *data;
-        if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+        if (isNetImage) {
             data = [[LLImageCache imageCache] getDataWithUrl:URL];
         }
         else if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
